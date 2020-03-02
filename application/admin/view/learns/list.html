@@ -1,0 +1,695 @@
+<html lang="en">
+
+{include file="./backend/header.html"}
+
+<body>
+{include file="./backend/sidebar.html"}
+{include file="./backend/top.html"}
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- 弹窗新增文章 -->
+    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 178%;float: left;left: -58px;">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">新增信息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate action="{:url('add_student')}" method="post">
+                        <input type="text" name="pic" hidden id="cover" value="">
+                        <div class="page-wrap">
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip01">姓名</label>
+                                <input type="text" class="form-control" id="validationTooltip01" name="uname" placeholder="请输入姓名" value="" required>
+                                <div class="invalid-tooltip">
+                                    请输入姓名
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">个人照片：</label>
+                                <div class="col-sm-10" style="float: left;left: -47px;">
+                                    <input class="btn btn-secondary selectImage file" id="selectImage"
+                                           type="file"/>
+                                    <img style="width: 100px;" class="cover" src=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">性别：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="custom-control custom-radio" style="float: left;top: 6px;left: -49px;">
+                                        <input type="radio" id="customRadio3" name="sex" value="男" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio3">男</label>
+                                    </div>
+                                    <div class="custom-control custom-radio" style="float: left;top: 6px;left: -36px;">
+                                        <input type="radio" id="customRadio4" name="sex" value="女" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio4">女</label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>出生年月</label>
+                                        <input type="text" class="form-control date" name="birth" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip04">校名</label>
+                                <input type="text" class="form-control" name="sname" id="validationTooltip04" placeholder="请输入学校名" required>
+                                <div class="invalid-tooltip">
+                                    请输入学校名
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">专业：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="major">
+                                                    <option value="">请选择</option>
+                                                    {foreach $major as $item}
+                                                    <option value="{$item->major}">{$item->major}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">请选择</span>
+                                                    <ul class="list">
+                                                        <li data-value="" class="option selected">请选择</li>
+                                                        {foreach $major as $item}
+                                                        <li data-value="{$item->major}" class="option selected">
+                                                            {$item->major}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学历：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="xueli">
+                                                    <option value="">请选择</option>
+                                                    {foreach $xueli as $item}
+                                                    <option value="{$item->xueli}">{$item->xueli}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">请选择</span>
+                                                    <ul class="list">
+                                                        <li data-value="" class="option selected">请选择</li>
+                                                        {foreach $xueli as $item}
+                                                        <li data-value="{$item->xueli}" class="option selected">
+                                                            {$item->xueli}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学制：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="xuezhi">
+                                                    <option value="">请选择</option>
+                                                    {foreach $xuezhi as $item}
+                                                    <option value="{$item->xuezhi}">{$item->xuezhi}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">请选择</span>
+                                                    <ul class="list">
+                                                        <li data-value="" class="option selected">请选择</li>
+                                                        {foreach $xuezhi as $item}
+                                                        <li data-value="{$item->xuezhi}" class="option selected">
+                                                            {$item->xuezhi}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学习形式：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="learning">
+                                                    <option value="">请选择</option>
+                                                    {foreach $learning as $item}
+                                                    <option value="{$item->learning}">{$item->learning}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">请选择</span>
+                                                    <ul class="list">
+                                                        <li data-value="" class="option selected">请选择</li>
+                                                        {foreach $learning as $item}
+                                                        <li data-value="{$item->learning}" class="option selected">
+                                                            {$item->learning}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学习层次：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="level">
+                                                    <option value="">请选择</option>
+                                                    {foreach $level as $item}
+                                                    <option value="{$item->level}">{$item->level}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">请选择</span>
+                                                    <ul class="list">
+                                                        <li data-value="" class="option selected">请选择</li>
+                                                        {foreach $level as $item}
+                                                        <li data-value="{$item->level}" class="option selected">
+                                                            {$item->level}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">毕业：</label>
+                                <div class="col-sm-10" style="float: left;left: -49px;">
+
+                                        <div class="custom-control custom-radio" style="float: left;left: -2px;top: 6px;">
+                                            <input type="radio" id="customRadio1" name="graduate" value="1" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">已毕业</label>
+                                        </div>
+                                        <div class="custom-control custom-radio" style="float: left;left: 6px;top: 6px;">
+                                            <input type="radio" id="customRadio2" name="graduate" value="0" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">未毕业</label>
+                                        </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>入学时间</label>
+                                        <input type="text" class="form-control date" name="r_time" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip08">毕业时间</label>
+                                <input type="text" class="form-control" name="b_time" id="validationTooltip08" placeholder="未毕业则不填..">
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip03">证书编号</label>
+                                <input type="text" class="form-control" name="snumber" id="validationTooltip03" placeholder="请输入证书编号" required>
+                                <div class="invalid-tooltip">
+                                    请输入证书编号
+                                </div>
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip05">校长名</label>
+                                <input type="text" class="form-control" name="xname" id="validationTooltip05" placeholder="校长姓名.." required>
+                                <div class="invalid-tooltip">
+                                    请输入校长姓名
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -221px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 文章新增截止-->
+    <!--查看入学时间-->
+    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 230%;float: left;left: -55%;">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabe2">学校详情</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="header-title">学校信息</h2>
+                                    <div class="table-responsive mt-3">
+                                        <table class="table mb-0">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th width="1%">ID</th>
+                                                <th width="1%">姓名</th>
+                                                <th width="1%">性别</th>
+                                                <th width="2%">出生年月</th>
+                                                <th width="5%">校名</th>
+                                                <th width="1%">入学时间</th>
+                                                <th width="1%">毕业时间</th>
+                                                <th width="2%">证书编号</th>
+                                                <th width="1%">校长名</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            {foreach $list as $item}
+                                            <tr>
+                                                <td>{$item->id}</td>
+                                                <td>{$item->uname}</td>
+                                                <td>{$item->sex}</td>
+                                                <td>{$item->birth}</td>
+                                                <td>{$item->sname}</td>
+                                                <td>{$item->r_time}</td>
+                                                <td>{$item->b_time}</td>
+                                                <td>{$item->snumber}</td>
+                                                <td>{$item->xname}</td>
+                                            </tr>
+                                            {/foreach}
+                                            </tbody>
+                                        </table>
+                                        {$list->render()}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 查看入学时间截止-->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Pentacle</h4>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <!--选择下拉框部分-->
+            <select class="test" id="my-menu">
+                <option value="all">毕业（全部）</option>
+                <option value="0">未毕业</option>
+                <option value="1">已毕业</option>
+            </select>
+
+            <select class="test" id="my-menu2">
+                <option value="all">学历（全部）</option>
+                {foreach $xueli as $item}
+                <option value={$item->xueli}>{$item->xueli}</option>
+                {/foreach}
+            </select>
+            <!-- <button type="button" class="btn btn-outline-info" style="margin-top: -24px;"
+            id="addNewArticle">新增</button> -->
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal1" style="margin-top: -24px;"
+            >新增
+            </button>
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal2" style="margin-top: -24px;">查看学校详情
+            </button>
+
+            <!-- 下拉菜单js-->
+            <script src="/static/js/jqueryTwo.js"></script>
+            <script src="/static/js/jquery.fancyspinbox.js"></script>
+            <script>
+                $('#my-menu').fancyspinbox();
+                $('#my-menu2').fancyspinbox();
+            </script>
+            <!-- 必须保证在一个div中 并注意优先级-->
+
+            <form action="{:url('Learns/Search')}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入姓名..." name="key" style="position: absolute;width: 20%;float: left;left: 83%;top: -37px;">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" style="position: absolute;float: left;left: 103%;top: -37px;height: 37px;">
+                            <i class="fe-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!--搜索框部分-->
+
+
+    </div>
+
+</div> <!-- container -->
+
+<!--表格主体部位-->
+<p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body ribbon-box">
+
+                <div class="ribbon ribbon-dark">详情信息</div>
+                <a class="btn btn-outline-danger" onclick="datadel()" href="javascript:;"
+                   style="float: right;margin-right: 2px;">批量删除</a>
+                <a href="{:url('index/exportSignup')}" target="_blank"   style="float: right;margin-right: 2px;">
+                    <button class="btn btn-outline-warning" id="exportExcel">批量导出Excel</button>
+                </a>
+                <form action="{:url('learns/insertExcel')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <!--<label class="col-sm-2 col-form-label" >导入excel：</label>-->
+                        <div class="col-sm-10" >
+                            <input class="btn btn-secondary selectImage file" name="excel"
+                                   type="file"/>
+                            <input type="submit" class="btn btn-outline-info" value="导入excel"/>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive mt-3">
+                    <table class="table mb-0">
+                        <thead class="thead-light">
+                        <tr>
+                            <th width="1%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input checkall" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1"></label>
+                                </div>
+                            </th>
+                            <!--<th width="1%"><input class="checkall" type="checkbox"/></th>-->
+                            <th width="1%">id</th>
+                            <th width="2%">姓名</th>
+                            <th width="2%">个人照片</th>
+                            <th width="2%">性别</th>
+                            <th width="3%">专业</th>
+                            <th width="2%">学历</th>
+                            <th width="2%">学制</th>
+                            <th width="3%">学习<br>形式</th>
+                            <th width="3%">学习<br>层次</th>
+                            <th width="3%">毕业</th>
+                            <th width="1%">创建时间</th>
+                            <th width="1%">更新时间</th>
+
+                            <th width="3%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $list as $item}
+                        <tr class="cen" id="{$item->id}">  <!--按钮开关需要在此指定id-->
+
+                            <td>
+                                <input class="checkone" type="checkbox" name="id" value="{$item['id']}"/>
+                            </td>
+                            <!--<td>-->
+                            <!--<div class="custom-control custom-checkbox">-->
+                            <!--<input class="custom-control-input checkone" type="checkbox" name="id" value="{$item['id']}" id="customCheck2"/>-->
+                            <!--<label class="custom-control-label" for="customCheck2"></label>-->
+                            <!--</div>-->
+                            <!--</td>-->
+                            <td>{$item->id}</td>
+                            <td>{$item->uname}</td>
+                            <td style="width: 130px;">
+                                <img style="width: 80px;" src="{$item->pic}"/>
+                            </td>
+                            <td>{$item->sex}</td>
+                            <td>{$item->major}</td>
+                            <!--<td>-->
+                            <!--<input class="state" type="checkbox" data-plugin="switchery"-->
+                            <!--data-color="#039cfd" hidden >-->
+                            <!--</td>-->
+                            <td>{$item->xueli}</td>
+                            <td>{$item->xuezhi}</td>
+                            <td>{$item->learning}</td>
+                            <td>{$item->level}</td>
+                            <td>{$item->graduate}</td>
+                            <td>{$item->create_time}</td>
+                            <td>{$item->update_time}</td>
+                            <td>
+                                <a title="编辑" class="edit" _id="{$item->id}" href="#">编辑</a>
+                                <a title="删除" class="delete" _id="{$item->id}" href="#">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+
+                        </tbody>
+                    </table>
+                    {$list->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--表格主体部位截止-->
+<script>
+    $(".selectImage").change(function (e) {
+        //如果有选择图片则上传图片
+        var files = e.target.files || e.dataTransfer.files;
+        var formData = new FormData();
+        if (files.length > 0) {
+            formData.append('imgs[]', files[0]);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '{:url("Index/uploads")}');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let resstr = xhr.responseText;
+                    let resp = JSON.parse(resstr);
+                    //console.log('上传成功:',resp.path);
+                    //处理其他数据，这里根据需要进行调整
+                    let imgepath = resp.path[0]; //组装数组
+                    $("#cover").val(imgepath);//设置为组装后的图片数组
+                    $(".cover").attr("src", imgepath);
+                }
+            };
+            xhr.send(formData);
+        }
+    });
+    //富文本
+    var E = window.wangEditor;
+    var editor = new E('#agreement');
+    var $text1 = $('#text1');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    };
+    // 自定义菜单配置
+    editor.customConfig.menus = [
+        'undo',  // 撤销
+        'redo',  // 重复
+        'head',  // 标题
+        'bold',  // 粗体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'image',  // 插入图片
+        'table',  // 表格
+        'code',  // 插入代码
+    ];
+    // 配置服务器端图片上传地址
+    editor.customConfig.uploadImgServer = '{:url("index/upload")}';
+    editor.customConfig.uploadFileName = 'imgs[]';
+    editor.customConfig.debug = true;
+    editor.create();
+
+    // 初始化 textarea 的值
+    $text1.val(editor.txt.html());
+    //编辑
+    $(".edit").click(function () {
+        let id = this.getAttribute("_id");
+        layer.open({
+            type: 2,
+            title: '编辑报名信息',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['880px', '750px'],
+            content: '{:url("learns/edit")}?id=' + id
+        });
+    });
+    //删除方法
+    $('.delete').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('Learns/del_student')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+
+    //批量删除
+    function datadel(obj) {
+        layer.confirm('确认要批量删除吗？', function (index) {
+            var id = new Array();
+            $('input[name="id"]:checked').each(function () {
+                id.push($(this).val());//向数组中添加元素
+            });
+            $.post(
+                "{:url('/admin/Learns/delAllCategory')}",
+                {id: id},
+                function (dat) {
+                    if (dat) {
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        document.location.reload();//当前页面
+                    } else {
+                        var msg = dat.msg;
+                        layer.msg(msg, {icon: 2, time: 2000});
+                    }
+                });
+        });
+    }
+
+    //全部选择
+    $(".checkall").click(function () {
+        if ($(this).is(':checked')) {
+            // 全选
+            $(".checkone").each(function () {
+                //$(this).attr('checked',true);// 此种方法第二次就失效
+                $(this).get(0).checked = true;// 转换为dom对象
+            })
+        } else {
+            // 反选
+            $(".checkone").each(function () {
+                //$(this).attr('checked',false);
+                $(this).get(0).checked = false;
+            })
+        }
+    });
+
+    //下拉菜单搜索方法(毕业项)
+    $("#my-menu").change(function (e) {
+        console.log(e.currentTarget.value);
+        let selected = e.currentTarget.value;
+        let action = "{$Request.action}";
+        let path = "{:url('getByGraduate')}?name=" + selected + "&action=" + action;
+        window.location.href = (path);
+    });
+    //
+    //下拉菜单搜索方法(学历项)
+    $("#my-menu2").change(function (e) {
+        console.log(e.currentTarget.value);
+        let selected = e.currentTarget.value;
+        let action = "{$Request.action}";
+        let path = "{:url('getByXueli')}?name=" + selected + "&action=" + action;
+        window.location.href = (path);
+    });
+    /* 此处为添加开关按钮，假设script必须写在footer之中*/
+    /**
+     * 修改Article推荐状态
+     */
+    $(".state").change(function (event) {
+        let _id = $(this).parents(".cen").attr('id');
+        $.ajax({
+            url: "{:url('/index.php/admin/Articles/recommend')}?id=" + _id,
+            success(res, state) {
+            }
+        });
+    });
+
+</script>
+<!--footer Style star-->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                ©Copyright 2019 <a href="" target="_blank">河南北极熊科技有限公司</a>
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-right footer-links d-none d-sm-block">
+                    <a href="#">About Us</a>
+                    <a href="#">Help</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--footer Style end-->
+{include file="./backend/footer.html"}
+
+</body>
+
+</html>

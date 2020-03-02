@@ -1,0 +1,507 @@
+
+<html lang="en">
+{include file="./backend/header.html"}
+
+<body>
+
+{include file="./backend/sidebar.html"}
+{include file="./backend/top.html"}
+<!-- 搜索 分类开始-->
+
+<div class="container-fluid">
+
+    <!-- 弹窗新增学习专业 -->
+    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">新增学习专业</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{:url('add_major')}" method="post">
+                        <div class="page-wrap">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">专业名称：</label>
+                                <div class="col-sm-10" style="float: left;left: -27px;">
+                                    <textarea class="form-control" name="major" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -88px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 弹窗新增学习专业截止-->
+    <!-- 弹窗新增学历-->
+    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabe2">新增学历</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{:url('add_xueli')}" method="post">
+                        <div class="page-wrap">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学历名称：</label>
+                                <div class="col-sm-10" style="float: left;left: -27px;">
+                                    <textarea class="form-control" name="xueli" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -88px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 弹窗新增学历截止-->
+    <!-- 弹窗新增学制 -->
+    <div id="myModal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabe3">新增学制</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{:url('add_xuezhi')}" method="post">
+                        <div class="page-wrap">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学制名称：</label>
+                                <div class="col-sm-10" style="float: left;left: -27px;">
+                                    <textarea class="form-control" name="xuezhi" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -88px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 弹窗新增学制截止-->
+    <!-- 弹窗新增学习形式 -->
+    <div id="myModal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabe4">新增学习形式</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{:url('add_learning')}" method="post">
+                        <div class="page-wrap">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">形式名称：</label>
+                                <div class="col-sm-10" style="float: left;left: -27px;">
+                                    <textarea class="form-control" name="learning" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -88px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 弹窗新增学习形式截止-->
+    <!-- 弹窗新增学习层次-->
+    <div id="myModal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabe5">新增学习层次</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{:url('add_level')}" method="post">
+                        <div class="page-wrap">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">层次名称：</label>
+                                <div class="col-sm-10" style="float: left;left: -27px;">
+                                    <textarea class="form-control" name="level" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -88px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- 弹窗新增学习层次截止-->
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Pentacle</h4>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom: 10px;">
+
+            <button type="button" class="btn btn-outline-info1" data-toggle="modal" data-target="#myModal1"
+                    style="margin-top: -24px;">新增学习专业
+            </button>
+            <button type="button" class="btn btn-outline-info2" data-toggle="modal" data-target="#myModal2"
+                    style="margin-top: -24px;">新增学历
+            </button>
+            <button type="button" class="btn btn-outline-info3" data-toggle="modal" data-target="#myModal3"
+                    style="margin-top: -24px;">新增学制
+            </button>
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal4"
+                    style="margin-top: -24px;">新增学习形式
+            </button>
+            <button type="button" class="btn btn-outline-info4" data-toggle="modal" data-target="#myModal5"
+                    style="margin-top: -24px;">新增学习层次
+            </button>
+
+        </div>
+
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body ribbon-box">
+                    <div class="ribbon ribbon-dark">学习专业</div>
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark mb-0">
+                            <thead >
+                            <tr>
+                                <th width="1%">ID</th>
+                                <th width="2%">专业名</th>
+                                <th width="2%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $major as $item}
+                            <tr>
+                                <td>{$item->id}</td>
+                                <td>{$item->major}</td>
+                                <td>
+                                    <a title="删除" class="delete1" _id="{$item->id}" href="#">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div>
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body ribbon-box">
+                    <div class="ribbon ribbon-primary">学历</div>
+                    <!--{foreach $xueli as $item}-->
+                    <!--<p class="mb-0">{$item->xueli}</p>-->
+                    <!--{/foreach}-->
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark mb-0">
+                            <thead >
+                            <tr>
+                                <th width="1%">ID</th>
+                                <th width="2%">学历名称</th>
+                                <th width="2%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $xueli as $item}
+                            <tr>
+                                <td>{$item->id}</td>
+                                <td>{$item->xueli}</td>
+                                <td>
+                                    <a title="删除" class="delete2" _id="{$item->id}" href="#">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div>
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body ribbon-box">
+                    <div class="ribbon ribbon-success">学制</div>
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark mb-0">
+                            <thead >
+                            <tr>
+                                <th width="1%">ID</th>
+                                <th width="2%">学制名称</th>
+                                <th width="2%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $xuezhi as $item}
+                            <tr>
+                                <td>{$item->id}</td>
+                                <td>{$item->xuezhi}</td>
+                                <td>
+                                    <a title="删除" class="delete3" _id="{$item->id}" href="#">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div> <!-- end card-body-->
+            </div>
+        </div> <!-- end col-->
+    </div>
+    <!-- end row -->
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body ribbon-box">
+                    <div class="ribbon ribbon-info">学习形式</div>
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark mb-0">
+                            <thead >
+                            <tr>
+                                <th width="1%">ID</th>
+                                <th width="2%">形式名称</th>
+                                <th width="2%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $learning as $item}
+                            <tr>
+                                <td>{$item->id}</td>
+                                <td>{$item->learning}</td>
+                                <td>
+                                    <a title="删除" class="delete4" _id="{$item->id}" href="#">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div>
+        </div> <!-- end col-->
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body ribbon-box">
+                    <div class="ribbon ribbon-warning">层次</div>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-dark mb-0">
+                            <thead >
+                            <tr>
+                                <th width="1%">ID</th>
+                                <th width="2%">层次名称</th>
+                                <th width="2%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $level as $item}
+                            <tr>
+                                <td>{$item->id}</td>
+                                <td>{$item->level}</td>
+                                <td>
+                                    <a title="删除" class="delete5" _id="{$item->id}" href="#">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-body-->
+            </div>
+        </div> <!-- end col-->
+
+    </div>
+    <!-- end row -->
+
+</div> <!-- container -->
+<!-- 搜索 分类结束-->
+<script>
+    //删除专业方法
+    $('.delete1').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('fenleis/del_major')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+    //删除学历方法
+    $('.delete2').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('fenleis/del_xueli')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+    //删除学制方法
+    $('.delete3').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('fenleis/del_xuezhi')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+    //删除学习形式方法
+    $('.delete4').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('fenleis/del_learning')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+    //删除学习层次方法
+    $('.delete5').click(function () {
+        let id = this.getAttribute("_id");
+        layer.confirm('确认删除此内容？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            //删除ajax
+            $.get("{:url('fenleis/del_level')}?id=" + id,
+                function (data, status) {
+                    console.log(status, data);
+                    if (data.code == 0)
+                        layer.msg("删除成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            );
+        }, function () {
+        });
+    });
+
+</script>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                ©Copyright 2019 <a href="" target="_blank"> Pentacle 制作</a>
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-right footer-links d-none d-sm-block">
+                    <a href="#">About Us</a>
+                    <a href="#">Help</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{include file="./backend/footer.html"}
+</body>
+
+</html>

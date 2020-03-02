@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    
+    //html
+    <div style="display: inline-flex;position: relative;">
+        <button class="layui-btn layui-bg-cyan" id='uploadExcel'><i class="layui-icon"></i>一键导入</button>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input style="opacity:0;width:113px;height:38px;position:absolute;right:0;top:0;" id="files" type="file" name="file"
+                accept=".csv, .xls, .xlsx" />
+        </form>
+    </div>
+     
+    //js
+    <script type="text/javascript">
+        $("#files").on("change", function (e) {
+            var file = document.getElementById("files").files[0];
+            var val = document.getElementById("files").value;
+            var suffix = val.substr(val.indexOf("."));
+     
+            //只能选择Excel类型的文件
+            if (suffix == '' || suffix == null) return;
+            if (suffix != '.csv' && suffix != '.xlsx' && suffix != '.xls') {
+                $('#files').val("");
+                layer.msg('只能选择Excel类型的文件', { icon: 0, time: 2000, anim: 6 });
+                return;
+            }
+     
+            layer.load(); //加载框
+            var formData = new FormData($('#uploadForm')[0]);
+            $.ajax({
+                type: 'post',
+                url: '{:url("api/Learns/importExcel")}',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                timeout: 0,
+                async: false,
+            }).success(function (res) {
+                $('#files').val(""); //解决选择两次相同的文件后第二次没有触发的方法
+                layer.closeAll('loading');//关闭加载框
+                if(res.code == 1) {
+                    layer.msg(res.msg, { icon: 1, time: 2000 }, function () {
+                        location.reload();
+                    });
+                } else {
+                    layer.msg(res.msg, { icon: 0, time: 2500 });
+                }
+            });
+        })
+    </script>
+</body>
+</html>

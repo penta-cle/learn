@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{include file="./backend/header.html"}
+<body>
+{include file="./backend/sidebar.html"}
+{include file="./backend/top.html"}
+<!-- 搜索 分类开始-->
+
+<!-- 搜索 分类结束-->
+<p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body ribbon-box">
+                <div class="ribbon ribbon-dark">分类介绍</div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover table-centered mb-0">
+                        <thead class="thead-light">
+                        <tr>
+                            <th width="1%">ID</th>
+                            <th width="5%">文章标题</th>
+                            <th width="5%">文章详情</th>
+                            <th width="5%">发布人</th>
+                            <th width="5%">评论数</th>
+                            <th width="3%">创建时间</th>
+                            <th width="3%">修改时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $list as $item}
+                        <tr>
+
+                            <td>{$item->id}</td>
+                            <td>{$item->atitle}</td>
+                            <td>{$item->atext}</td>
+                            <td>{$item->aname}</td>
+                            <td>{$item->allpinglun}</td>
+                            <td>{$item->create_time}</td>
+                            <td>{$item->update_time}</td>
+
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+{include file="./backend/footer.html"}
+</body>
+</html>

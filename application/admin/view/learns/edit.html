@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+{include file="./backend/header.html"}
+<body>
+
+<div class="row" style="float: left;width: 100%;padding: 7%;margin: auto; background-color: #fff;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    <form class="needs-validation" novalidate action="{:url('edit_student')}" method="post">
+                        <input type="text" name="pic" hidden id="cover" value="{$list['pic']}">
+                        <div class="page-wrap">
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip01">姓名</label>
+                                <input type="text" class="form-control" id="validationTooltip01" name="uname" placeholder="请输入姓名" value="{$list['uname']}" required>
+                                <div class="invalid-tooltip">
+                                    请输入姓名
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">个人<br>照片：</label>
+                                <div class="col-sm-10">
+                                    <input class="btn btn-secondary selectImage file" id="selectImage"
+                                           type="file" style="position: relative;float: left;left: -5px;top: 25px;"/>
+                                    <img style="width: 100px;position: relative;float: right;right: -33px;top: -31px;" class="cover" src="{$list['pic']}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">性别：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="custom-control custom-radio" style="float: left;top: 6px;">
+                                        <input type="radio" id="customRadio3" name="sex" value="男" class="custom-control-input" {$list['sex'] == "男" ? 'checked = "checked"':''}>
+                                        <label class="custom-control-label" for="customRadio3">男</label>
+                                    </div>
+                                    <div class="custom-control custom-radio" style="float: left;top: 6px;left: 11px;">
+                                        <input type="radio" id="customRadio4" name="sex" value="女" class="custom-control-input" {$list['sex'] == "女" ? 'checked = "checked"':''}>
+                                        <label class="custom-control-label" for="customRadio4">女</label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip06">出生年月</label>
+                                <input type="text" class="form-control" name="birth" id="validationTooltip06" placeholder="请输入出生年月" value="{$list['birth']}"  required>
+                                <div class="invalid-tooltip">
+                                    请输入出生年月
+                                </div>
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip04">校名</label>
+                                <input type="text" class="form-control" name="sname" id="validationTooltip04" placeholder="请输入学校名" value="{$list['sname']}" required>
+                                <div class="invalid-tooltip">
+                                    请输入学校名
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">专业：</label>
+                                <div class="col-sm-10" >
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="major">
+                                                    {foreach $major as $item}
+                                                    <option value="{$item->major}">{$item->major}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">{$list['major']}</span>
+                                                    <ul class="list">
+                                                        {foreach $major as $item}
+                                                        <li data-value="{$item->major}" class="option selected">
+                                                            {$item->major}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学历：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="xueli">
+                                                    {foreach $xueli as $item}
+                                                    <option value="{$item->xueli}">{$item->xueli}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">{$list['xueli']}</span>
+                                                    <ul class="list">
+                                                        {foreach $xueli as $item}
+                                                        <li data-value="{$item->xueli}" class="option selected">
+                                                            {$item->xueli}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学制：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="xuezhi">
+                                                    {foreach $xuezhi as $item}
+                                                    <option value="{$item->xuezhi}">{$item->xuezhi}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">{$list['xuezhi']}</span>
+                                                    <ul class="list">
+                                                        {foreach $xuezhi as $item}
+                                                        <li data-value="{$item->xuezhi}" class="option selected">
+                                                            {$item->xuezhi}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学习形式：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="learning">
+                                                    {foreach $learning as $item}
+                                                    <option value="{$item->learning}">{$item->learning}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">{$list['learning']}</span>
+                                                    <ul class="list">
+                                                        {foreach $learning as $item}
+                                                        <li data-value="{$item->learning}" class="option selected">
+                                                            {$item->learning}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">学习<br>形式：</label>
+                                <div class="col-sm-10" >
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-3">
+                                                <select data-plugin="customselect" style="display: none;"
+                                                        name="level">
+                                                    {foreach $level as $item}
+                                                    <option value="{$item->level}">{$item->level}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <div class="nice-select" tabindex="0"><span class="current">{$list['level']}</span>
+                                                    <ul class="list">
+                                                        {foreach $level as $item}
+                                                        <li data-value="{$item->level}" class="option selected">
+                                                            {$item->level}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">毕业：</label>
+                                <div class="col-sm-10">
+
+                                    <div class="custom-control custom-radio" style="float: left;left: -2px;top: 6px;">
+                                        <input type="radio" id="customRadio1" name="graduate" value="1" class="custom-control-input" {$list['graduate'] == 1 ? 'checked = "checked"':''}>
+                                        <label class="custom-control-label" for="customRadio1">已毕业</label>
+                                    </div>
+                                    <div class="custom-control custom-radio" style="float: left;left: 6px;top: 6px;">
+                                        <input type="radio" id="customRadio2" name="graduate" value="0" class="custom-control-input" {$list['graduate'] == 0 ? 'checked = "checked"':''}>
+                                        <label class="custom-control-label" for="customRadio2">未毕业</label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>入学时间</label>
+                                        <input type="text" class="form-control date" name="r_time" value="{$list['r_time']}" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip08">毕业时间</label>
+                                <input type="text" class="form-control" name="b_time" value="{$list['b_time']}" id="validationTooltip08" placeholder="未毕业则不填..">
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip03">证书编号</label>
+                                <input type="text" class="form-control" name="snumber" id="validationTooltip03" placeholder="请输入证书编号" value="{$list['snumber']}"  required>
+                                <div class="invalid-tooltip">
+                                    请输入证书编号
+                                </div>
+                            </div>
+
+                            <div class="form-group position-relative mb-3">
+                                <label for="validationTooltip05">校长名</label>
+                                <input type="text" class="form-control" name="xname" value="{$list['xname']}" id="validationTooltip05" placeholder="校长姓名.." required>
+                                <div class="invalid-tooltip">
+                                    请输入校长姓名
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 justify-content-end row">
+                                <div class="col-9" style="float: left;left: -123px;">
+                                    <input type="submit" class="btn btn-outline-info" value="提交"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".selectImage").change(function (e) {
+            //如果有选择图片则上传图片
+            var files = e.target.files || e.dataTransfer.files;
+            var formData = new FormData();
+            if (files.length > 0) {
+                formData.append('imgs[]', files[0]);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{:url("Index/uploads")}');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        let resstr = xhr.responseText;
+                        let resp = JSON.parse(resstr);
+                        //console.log('上传成功:',resp.path);
+                        //处理其他数据，这里根据需要进行调整
+                        let imgepath = resp.path[0]; //组装数组
+                        $("#cover").val(imgepath);//设置为组装后的图片数组
+                        $(".cover").attr("src", imgepath);
+                    }
+                };
+                xhr.send(formData);
+            }
+        });
+        //富文本
+        var E = window.wangEditor;
+        var editor = new E('#agreement');
+        var $text1 = $('#text1');
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $text1.val(html)
+        };
+        // 自定义菜单配置
+        editor.customConfig.menus = [
+            'undo',  // 撤销
+            'redo',  // 重复
+            'head',  // 标题
+            'bold',  // 粗体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'image',  // 插入图片
+            'table',  // 表格
+            'code',  // 插入代码
+        ];
+        // 配置服务器端图片上传地址
+        editor.customConfig.uploadImgServer = '{:url("index/upload")}';
+        editor.customConfig.uploadFileName = 'imgs[]';
+        editor.customConfig.debug = true;
+        editor.create();
+
+        // 初始化 textarea 的值
+        $text1.val(editor.txt.html())
+    </script>
+    {include file="./backend/footer.html"}
+</div>
+
+</body>
+
+</html>
